@@ -39,7 +39,31 @@ func initialize_points():
 	pass
 
 func connect_points():
-	print(tile_map.get_used_rect())
+	var check_distances:Vector2=tile_map.tile_set.tile_size/2+Vector2i(1,1)
+	
+	for i in astar_instance.get_point_count():
+		connect_to_neighbor_points(i,check_distances,Vector2.RIGHT,true)
+		connect_to_neighbor_points(i,check_distances,Vector2.DOWN,true)
+	pass
+
+func connect_to_neighbor_points(current_point_id:int,check_distances:Vector2,check_direction:Vector2,bidirectional:bool):
+	
+	var current_point_position:Vector2
+	var checked_point_id:int
+	var checked_point_position:Vector2
+	
+	current_point_position=astar_instance.get_point_position(current_point_id)
+	
+	checked_point_id=astar_instance.get_closest_point\
+	(current_point_position+check_distances*check_direction)
+	
+	checked_point_position=astar_instance.get_point_position(checked_point_id)
+	
+	if checked_point_id!=current_point_id &&\
+		!((current_point_position.x != checked_point_position.x) &&\
+		current_point_position.y != checked_point_position.y):
+			#print(current_point_position-astar_instance.get_point_position(checked_point_id))
+			astar_instance.connect_points(current_point_id,checked_point_id,bidirectional)
 	pass
 
 func get_tile_position_from_index(index:int)->Vector2:
@@ -56,8 +80,18 @@ func test_tilemap_cells():
 		#print(get_tile_position_from_index(i))
 		pass
 func _draw():
-#endregion
 	for i in tilemap_crossable_cells.size():
-		draw_circle(convert_tile_coordnates_to_world(tilemap_crossable_cells[i]),5,Color.RED)
+		draw_circle(convert_tile_coordnates_to_world(tilemap_crossable_cells[i]),10,Color.RED)
+	
+	var checked_point_position:Vector2
+	var connected_point_position:Vector2
+	
 	for i in astar_instance.get_point_count():
-		draw_circle(astar_instance.get_point_position(i),3,Color.BLUE)
+		draw_circle(astar_instance.get_point_position(i),6,Color.BLUE)
+		checked_point_position=astar_instance.get_point_position(i)
+		for j in astar_instance.get_point_connections(i).size():
+			connected_point_position=astar_instance.get_point_position\
+			(astar_instance.get_point_connections(i)[j])
+			draw_circle(checked_point_position+(connected_point_position-checked_point_position)/4,6,Color.DARK_BLUE)
+			pass
+#endregion
