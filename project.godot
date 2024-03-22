@@ -15,13 +15,27 @@ run/main_scene="res://Levels/level_1.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SwipeDetector="*res://Scripts/Autoloads/swipe_detector.gd"
+
 [display]
 
-window/size/viewport_width=352
-window/size/viewport_height=640
+window/size/viewport_width=704
+window/size/viewport_height=1280
 window/size/resizable=false
+window/size/window_width_override=352
+window/size/window_height_override=640
 window/stretch/mode="viewport"
 window/handheld/orientation=1
+
+[input]
+
+Touch={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(155, 7),"global_position":Vector2(159, 48),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [input_devices]
 

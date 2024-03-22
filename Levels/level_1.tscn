@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cags4tqhahyo0"]
+[gd_scene load_steps=4 format=3 uid="uid://cags4tqhahyo0"]
 
-[ext_resource type="PackedScene" uid="uid://w1t7lryf7ufk" path="res://Prefabs/tile_map_AStar_implementation.tscn" id="2_4uc6d"]
+[ext_resource type="Script" path="res://Scripts/Levels/level_script.gd" id="1_usx72"]
+[ext_resource type="PackedScene" uid="uid://w1t7lryf7ufk" path="res://Prefabs/Utilities/tile_map_AStar_implementation.tscn" id="2_4uc6d"]
+[ext_resource type="PackedScene" uid="uid://dnb8k7nbco71c" path="res://Prefabs/Characters/player.tscn" id="3_2qs2i"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_usx72")
 
 [node name="TileMapWithNavigationPoints" parent="." instance=ExtResource("2_4uc6d")]
-scale = Vector2(0.5, 0.5)
+
+[node name="Player" parent="." instance=ExtResource("3_2qs2i")]
+position = Vector2(522, 292)
+scale = Vector2(0.46, 0.46)
+
+[editable path="TileMapWithNavigationPoints"]
