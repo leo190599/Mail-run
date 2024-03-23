@@ -10,7 +10,8 @@ script = ExtResource("1_usx72")
 [node name="TileMapWithNavigationPoints" parent="." instance=ExtResource("2_4uc6d")]
 
 [node name="Player" parent="." instance=ExtResource("3_2qs2i")]
-position = Vector2(522, 292)
+z_index = 1
+position = Vector2(669, 732)
 scale = Vector2(0.46, 0.46)
 
 [editable path="TileMapWithNavigationPoints"]

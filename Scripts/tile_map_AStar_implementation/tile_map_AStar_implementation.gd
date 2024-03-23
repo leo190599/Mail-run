@@ -20,7 +20,38 @@ func _ready():
 	#test_astar_points()
 	pass # Replace with function body.
 
-
+func get_neighbour_point_id_from_direction(current_point_id:int,direction:Vector2)->int:
+	if direction.length()==0 || current_point_id<0||current_point_id>=_astar_instance.get_point_count():
+		return -1
+	direction=direction.normalized()
+	
+	var neighbour_points:PackedInt64Array=_astar_instance.get_point_connections(current_point_id)
+	
+	if neighbour_points.size()<=0:
+		return -1
+	
+	if abs(direction.x)>abs(direction.y):
+		if direction.x>0:
+			for i in neighbour_points.size():
+				if _astar_instance.get_point_position(neighbour_points[i]).x>_astar_instance.get_point_position(current_point_id).x:
+					return neighbour_points[i]
+		else :
+			for i in neighbour_points.size():
+				if _astar_instance.get_point_position(neighbour_points[i]).x<_astar_instance.get_point_position(current_point_id).x:
+					return neighbour_points[i]
+			pass
+	else :
+		if direction.y>0:
+			for i in neighbour_points.size():
+				if _astar_instance.get_point_position(neighbour_points[i]).y>_astar_instance.get_point_position(current_point_id).y:
+					return neighbour_points[i]
+			pass
+		else :
+			for i in neighbour_points.size():
+				if _astar_instance.get_point_position(neighbour_points[i]).y<_astar_instance.get_point_position(current_point_id).y:
+					return neighbour_points[i]
+			pass
+	return -1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	

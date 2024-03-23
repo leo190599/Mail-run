@@ -11,4 +11,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	queue_redraw()
 	pass
+func _draw():
+	draw_circle(player.next_node_position,10,Color.RED)
+	draw_circle(player.current_node_position,10,Color.BLUE)
+	
